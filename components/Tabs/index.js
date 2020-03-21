@@ -15,14 +15,29 @@ function Tabs(tabName) {
 
     tab.addEventListener("click", (event) => {
         const tabs = document.querySelectorAll(".tab");
+        const cards = document.querySelectorAll(".card");        
+        
+        cards.forEach(card => card.setAttribute("style", "display: none"));
 
         if(event.target.textContent === "all") {
             tabs.forEach(tab => tab.classList.remove("active-tab"));
+            event.target.classList.toggle("active-tab");
+            cards.forEach(card => card.setAttribute("style", "display: block"));
         } else {
-            document.querySelector(".all").classList.remove("active-tab");
+            //document.querySelector(".all").classList.remove("active-tab");
+            tabs.forEach(tab => tab.classList.remove("active-tab"));
+            event.target.classList.toggle("active-tab");
+
+            cards.forEach(card => {
+                if(card.getAttribute("data-topic") === event.target.textContent.split(".")[0]) {
+                    card.setAttribute("style", "display: block");
+                }
+            });
         }
     
-        event.target.classList.toggle("active-tab");
+        
+
+        
         
     });
 
