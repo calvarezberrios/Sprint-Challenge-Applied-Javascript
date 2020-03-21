@@ -44,7 +44,7 @@ function cardCreator(data, topic) {
 }
 
 const cardsContainer = document.querySelector(".cards-container");
-cardsContainer.appendChild(cardCreator({headline: "test", authorPhoto: "#", authorName: "Tester"}, "test"));
+//cardsContainer.appendChild(cardCreator({headline: "test", authorPhoto: "#", authorName: "Tester"}, "test"));
 
 axios.get("https://lambda-times-backend.herokuapp.com/articles")
     .then(response => {
@@ -53,7 +53,9 @@ axios.get("https://lambda-times-backend.herokuapp.com/articles")
 
         categories.forEach(category => {
             console.log(response.data.articles[category]);
-            category.forEach()
+            const articles = response.data.articles[category];
+
+            articles.forEach(article => cardsContainer.appendChild(cardCreator(article, category)));
         });
     })
     .catch(err => {
